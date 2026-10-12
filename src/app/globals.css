@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-display: "Bricolage Grotesque Variable", "Arial Narrow", sans-serif;
+  --font-body: "Instrument Sans Variable", system-ui, sans-serif;
+  --paper: #f6f7f3;
+  --paper-2: #eceee8;
+  --ink: #1c1f26;
+  --muted: #646a73;
+  --line: #dcdfd8;
+  --accent: #2f45d9;
+  --accent-ink: #ffffff;
+  --tag: #f2d64b;
+  --danger: #c2361f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-tag: var(--tag);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Stage colors per lighting mood */
+.stage {
+  --stage-ink: #1c1f26;
+  --stage-soft: rgba(28, 31, 38, 0.6);
+  --stage-chip: rgba(255, 255, 255, 0.62);
+  --stage-chip-line: rgba(28, 31, 38, 0.1);
+  --stage-inverse: #f6f7f3;
+}
+.stage[data-mood="sunset"] {
+  --stage-ink: #2a1410;
+  --stage-soft: rgba(42, 20, 16, 0.62);
+  --stage-chip: rgba(255, 244, 236, 0.58);
+  --stage-chip-line: rgba(42, 20, 16, 0.12);
+}
+.stage[data-mood="neon"] {
+  --stage-ink: #f1eefe;
+  --stage-soft: rgba(241, 238, 254, 0.62);
+  --stage-chip: rgba(30, 22, 64, 0.62);
+  --stage-chip-line: rgba(241, 238, 254, 0.14);
+  --stage-inverse: #140d33;
+}
+
+.backdrop-type {
+  -webkit-text-stroke: 2px var(--stage-ink);
+  color: transparent;
+  opacity: 0.13;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+  background: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
